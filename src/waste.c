@@ -257,6 +257,9 @@ int waste(struct tls *ctx, char *ip, char *url) {
     fprintf(letter, ": %s@%s\n", mailbox, hostname);
     fprintf(letter, "@ %s\n\n", iso);
     fprintf(letter, "%s\n", message);
+    fclose(letter);
+
+    chown(path, pwd->pw_uid, pwd->pw_gid);
   }
 
   return header(ctx, 20, mbfingerprint);
