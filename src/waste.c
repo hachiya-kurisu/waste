@@ -246,7 +246,7 @@ int waste(struct tls *ctx, char *ip, char *url) {
     char path[PATH_MAX] = { 0 };
     snprintf(path, PATH_MAX, "%s/.waste/inbox/%lld.%d.gmi", home, now, pid);
 
-    umask(0022);
+    umask(117);
     FILE *letter = fopen(path, "w");
     if(!letter)
       return header(ctx, 41, "server currently unvailable");
