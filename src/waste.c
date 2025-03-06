@@ -319,7 +319,7 @@ int main(int argc, char *argv[]) {
   if(group && grp && setgid(grp->gr_gid)) errx(1, "setgid failed");
   if(user && pwd && setuid(pwd->pw_uid)) errx(1, "setuid failed");
 
-  if(pledge("stdio inet proc dns rpath wpath cpath getpw unix flock unveil", 0))
+  if(pledge("stdio inet proc dns rpath wpath cpath getpw unix flock unveil chown", 0))
     errx(1, "pledge failed");
 
   bzero(&addr, sizeof(addr));
