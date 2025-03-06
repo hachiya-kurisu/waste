@@ -244,7 +244,7 @@ int waste(struct tls *ctx, char *ip, char *url) {
   pid_t pid = getpid();
   if (strlen(message) > 0) {
     char path[PATH_MAX] = { 0 };
-    snprintf(path, PATH_MAX, "%s/.waste/inbox/%ld.%d.gmi", home, now, pid);
+    snprintf(path, PATH_MAX, "%s/.waste/inbox/%lld.%d.gmi", home, now, pid);
 
     FILE *letter = fopen(path, "w");
     if(!letter)
