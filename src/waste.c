@@ -246,6 +246,7 @@ int waste(struct tls *ctx, char *ip, char *url) {
     char path[PATH_MAX] = { 0 };
     snprintf(path, PATH_MAX, "%s/.waste/inbox/%lld.%d.gmi", home, now, pid);
 
+    umask(0022);
     FILE *letter = fopen(path, "w");
     if(!letter)
       return header(ctx, 41, "server currently unvailable");
@@ -258,8 +259,6 @@ int waste(struct tls *ctx, char *ip, char *url) {
     fprintf(letter, "@ %s\n\n", iso);
     fprintf(letter, "%s\n", message);
     fclose(letter);
-
-    chown(path, pwd->pw_uid, pwd->pw_gid);
   }
 
   return header(ctx, 20, mbfingerprint);
@@ -319,7 +318,7 @@ int main(int argc, char *argv[]) {
   if(group && grp && setgid(grp->gr_gid)) errx(1, "setgid failed");
   if(user && pwd && setuid(pwd->pw_uid)) errx(1, "setuid failed");
 
-  if(pledge("stdio inet proc dns rpath wpath cpath getpw unix flock unveil chown", 0))
+  if(pledge("stdio inet proc dns rpath wpath cpath getpw unix flock unveil", 0))
     errx(1, "pledge failed");
 
   bzero(&addr, sizeof(addr));
