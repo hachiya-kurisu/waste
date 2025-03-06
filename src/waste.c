@@ -236,7 +236,7 @@ int waste(struct tls *ctx, char *ip, char *url) {
   char mbfingerprint[HEADER] = { 0 };
   char *p = mbfingerprint;
   for (unsigned int i = 0; i < mdlen; i++) {
-    sprintf(p, "%02x", md[i]);
+    snprintf(p, 3, "%02x", md[i]);
     p += 2;
   }
   *p = '\0';
